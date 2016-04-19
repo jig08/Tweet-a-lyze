@@ -1,0 +1,322 @@
+<!doctype html>
+
+<head>
+	<meta charset="utf-8">
+	<meta charset=utf-8>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Tweet-a-lyze</title>
+
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<link rel='stylesheet' href='assets/css/fonts.googleapis.css'>
+	<link rel="stylesheet" href="assets/css/whhg.css" />
+	<link rel="stylesheet" href="assets/css/grid.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
+
+	<!--SKIN STYLES: Note, to use another skin found in the "css" folder --> 
+	<!-- <link rel="stylesheet" href="css/skin-dark.css"> -->
+
+	<link rel="icon" type="image/png" href="assets/images/favicon.png">
+	<link rel="apple-touch-icon" href="assets/images/logo.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="assets/images/logo.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="assets/images/logo.png">
+
+</head>
+
+<body>
+	<div ng-app="TweetSearch" ng-controller="Controller">
+
+	<div id="Head" class="container" >
+
+		<div class="row">
+			
+			<div class="col span_16">
+				<h1 id="Domain">Tweet-a-lyze<br>
+					<span>Analyze the tweets. Live. Big.</span></h1>
+					<br><br>
+			</div>
+			
+			
+			<input type="text" id="query" ng-model="query" placeholder="Search tweets from Twitter using Loklak.  Keyword could be hashtags, mentions, etc">
+
+			<div id="Action" >
+				<a href="#" class="btn btn-icon btn-block" ng-click="Search()">
+					<i class="icon icon-search">
+					</i> 
+					Search
+				</a>
+			</div>
+		
+
+		</div>
+	</div>
+
+	<br><br>
+
+	<div id="Content" class="container">
+	
+		<div class="row special">
+			<div class="col span_24">
+				<h2 class="align-center margin"><strong>Top Tweet</strong></h2>
+				<h3 class="align-center margin">
+					<img src="{{myData[0].user.profile_image_url_https}}" alt="Loading profile picture..." height="44" width="44">
+					&nbsp;&nbsp;		
+					<a href="{{myData[0].link}}"> <strong>{{myData[0].screen_name}} : </strong> {{myData[0].text}} </a>
+				</h3>
+			</div>
+		</div>
+
+	<div id="Stats" class="container">
+		<div class="row">
+
+			<div class="col span_4">
+				<b class="value">{{myData[0].classifier_language | limitTo: 3}}</b>
+				<i class="info">Language</i>
+			</div>
+			
+			<div class="col span_4">
+				<b class="value">{{myData[0].retweet_count}}</b>
+				<i class="info">Retweet Count</i>
+			</div>
+
+			<div class="col span_4">
+				<b class="value">{{myData[0].favourites_count}}</b>
+				<i class="info">Favourites Count</i>
+			</div>
+
+			<div class="col span_4">
+				<b class="value">{{myData[0].mentions_count}}</b>
+				<i class="info">Mentions Count</i>
+			</div>
+
+			<div class="col span_4">
+				<b class="value">{{myData[0].hashtags_count}}</b>
+				<i class="info">Hashtags Count</i>
+			</div>
+
+			<div class="col span_4">
+				<b class="value">{{myData[0].images_count + myData[0].audio_count + myData[0].videos_count}}</b>
+				<i class="info">Media Count</i>
+			</div>
+
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="row padding">
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="{{myData[0].images[0]}}" alt="Image 1 of Tweet" height="125" width="125">
+				</p>
+			</div>
+
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="{{myData[0].images[1]}}" alt="Image 2 of Tweet" height="125" width="125">
+				</p>
+			</div>
+
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="assets/images/loklak.png" alt="" height="125" width="125">
+				</p>
+			</div>
+
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="assets/images/loklak.png" alt="" height="125" width="125">
+				</p>
+			</div>
+
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="assets/images/loklak.png" alt="" height="125" width="125">
+				</p>
+			</div>
+
+			<div class="col span_4">
+				 <p class="align-center margin">
+					<img src="assets/images/loklak.png" alt="" height="125" width="125">
+				</p>
+			</div>
+			
+	</div>
+
+	<hr class="divider">		
+
+	<br><br>
+
+	<h2 class="align-center margin">Other Tweets</h2>
+
+	<div class="row padding">
+		<table class="col span_22">
+				
+				<tr class="align-center margin">
+					<th></th>
+					<th class="align-center margin">...</th>
+				</tr>
+
+                <tr class="align-center margin" ng-repeat="x in myData">
+                	<th></th>
+                    <td class="align-center margin">
+                    	<p class="align-center margin" ng-bind-html="x.text | limitTo: 1"></p>
+                    	<a href="{{x.link}}" target="_blank"></a>
+                    </td>
+                </tr>
+
+            </table>
+	</div>
+
+	<hr class="divider">
+
+	<div class="row padding">
+		<div class="col span_24">
+
+			<!-- "About" text block.-->
+			<!-- <p class="align-center margin">
+				<img src="assets/images/logo.png" alt="" height="150" width="500">
+			</p> -->
+
+			<h1 class="align-center margin">Tweet-a-lyze</h1>
+
+			<p class="align-center margin">Tweet-a-lyze helps analyze tweets. Live & Big.</p>
+			<p class="align-center margin">It is a tweet search and analysis tool which scraps JSON data using the Loklak API</p>
+
+		</div>
+	</div>
+
+
+	<hr class="divider">
+
+	<br><br>
+	
+	<h2 class="align-center margin">Why Loklak ?</h2>
+		
+	<div class="row padding">
+
+		<p class="align-center margin">
+			<img src="assets/images/loklak.png" alt="" height="150" width="150">
+		</p>
+
+		<p class="align-center margin"><a href="http://loklak.org">Loklak</a> is a server application which is able to collect messages from various sources, including Twitter. This server contains a search index and a peer-to-peer index sharing interface.</p>
+		<p class="align-center margin">If one likes to be anonymous when searching things, want to archive Tweets or messages about specific topics and if you are looking for a tool to create statistics about Tweet topics, then Loklak is the best option to consider. 
+		<br><br>
+
+	</div>
+		
+
+	<div class="row padding">
+
+		<div class="col span_8">
+			<div class="circle"><i class="icon icon-support"></i></div>
+			<h3 class="align-center">Easy to use</h3>
+			<p class="align-center">Collect and store a very, very large amount of Tweets and similar messages. Create one's own search engine for Tweets</p>
+		</div>
+
+		<div class="col span_8">
+			<div class="circle"><i class="icon icon-stockup"></i></div>
+			<h3 class="align-center">Visualize & Evaluate Social Data</h3>
+			<p class="align-center">Create one's own Tweet search portal or statistical evaluations. Analyze large amounts of Tweets as a source for statistical data.</p>
+		</div>
+
+		<div class="col span_8">
+			<div class="circle"><i class="icon icon-search"></i></div>
+			<h3 class="align-center">Anonymous Search</h3>
+			<p class="align-center">Omit authentication enforcement for API requests on the Twitter platform. Search anonymously on one's own search portal</p>
+		</div>
+
+	</div>
+
+	<hr class="divider">
+	
+	<div class="row padding">
+		
+	<div class="align-center margin">
+				<i>If one wants to create an alternative Twitter search portal, the only way would be to use the official Twitter API to retrieve Tweets. But that interface needs an <code>OAuth</code> account and it makes the search portal completely dependent on Twitter's goodwill.
+				<br><br>The alternative is, to scrape the Tweets from the Twitter HTML search result pages, but Twitter may still lock out on that IP address. To circumvent this, one needs many clients accessing Twitter to scrape search results. This makes it necessary to create a distributed peer-to-peer network of Twitter scrapers which can all organize, store and index Tweets. This solution was created with <code>Loklak</code>.</i>
+        
+        		<br><br>
+        		<p class="align-center margin"><strong>Best of all : </strong><i>A very generic to integrate with different microblogging services was developed, so this may be the incubator for an independent short message or Twitter-like platform.</p>
+	</div>
+
+	</div>
+
+	<hr class="divider">
+
+		<div class="row padding">			
+
+			<div class="col span_24">
+
+				<h2 class="align-center margin">Suggestions and Feedback Appreciated :)</h2>
+
+				<div id="Offer">
+
+					<div class="row">
+						<div class="col span_12">
+							<input type="text" placeholder="Your Name" id="f_name" name="f_name" >
+						</div>
+						<div class="col span_12">
+							<input type="text" placeholder="Your email address" id="f_email" name="f_email" >
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col span_24">
+							<textarea id="f_offer" name="f_offer" rows="10">I would really like this concept of analyzing tweets ...</textarea>
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col span_24 align-right" ng-controller='MyCtrl'>
+							
+							<button class="btn btn-large" type="button" ng-click='toggleModal()'>
+								Submit
+							</button>
+
+							<modal-dialog show='modalShown' width='500px' height='10%'>
+								<h2 class="align-center margin"> Submission Successful ! </h2>
+      							<p class="align-center margin">Thank you for your suggestion/or feedback :)<br>
+      								We will get back to you shortly...
+      							<p>
+    						</modal-dialog>
+
+
+						</div>
+
+					</div>
+
+				</div> 
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+</div>
+
+	<br><br>
+	
+	<div id="Footer" class="container">
+		<div class="row top">
+			<div class="col span_16">Copyright &copy; 2016, Jigyasa Grover. All rights reserved.</div>
+		</div>
+	</div>
+
+<!-- To track visits, insert google analytics code here -->
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/angular.min.js"></script>
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/jQuery.min.js"></script>
+
+</body>
+
+</html>
