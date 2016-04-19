@@ -19,6 +19,21 @@ var app = angular.module('TweetSearch', []);
 
         }]);
 
+        app.controller('LoklakPeersController', ['$scope', '$http', '$sce', function($scope, $http, $sce){
+            $scope.showPeers = function() {
+
+                var peers_QueryCommand = 'http://loklak.org/api/peers.json';
+
+                $http.get(String(peers_QueryCommand)).then(function(peers_response) {
+                    console.log(peers_response.data.peers[0].host);
+                    $scope.peers_myData = peers_response.data.peers;
+                    for (var i = 0; i < $scope.peers_myData.length; ++i) {
+                        $scope.peers_myData[i].host = $sce.trustAsHtml($scope.peers_myData[i].host);
+                    }
+                });
+            }
+        }]);
+
 
         app.directive('modalDialog', function() {
             return {
@@ -51,3 +66,23 @@ var app = angular.module('TweetSearch', []);
             $scope.modalShown = !$scope.modalShown;
             };
         }]);
+
+
+
+// var app = angular.module('LoklakPeers', []);
+//         app.controller('LoklakPeersController', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+
+//             $scope.showPeers = function() {
+
+//                 var peers_QueryCommand = 'http://loklak.org/api/peers.json';
+
+//                 $http.get(String(peers_QueryCommand)).then(function(peers_response) {
+//                     console.log(peers_response.data.peers[0].host);
+//                     $scope.peers_myData = peers_response.data.peers;
+//                     for (var i = 0; i < $scope.peers_myData.length; ++i) {
+//                         $scope.peers_myData[i].host = $sce.trustAsHtml($scope.peers_myData[i].host);
+//                     }
+//                 });
+//             }
+
+//         }]);
