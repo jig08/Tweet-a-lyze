@@ -325,33 +325,54 @@
 
 						<div class="row">
 							<div class="col span_12">
-								<input type="text" placeholder="Your Name" id="f_name" name="f_name" >
+								<input type="text" placeholder="Your Name" ng-model="f_name" id="f_name" name="f_name" >
 							</div>
 							<div class="col span_12">
-								<input type="text" placeholder="Your email address" id="f_email" name="f_email" >
+								<input type="text" placeholder="Your email address" ng-model="f_email" id="f_email" name="f_email" >
 							</div>						
 						</div>
 
 						<div class="row">
 							<div class="col span_24">
-								<textarea id="f_offer" name="f_offer" rows="10">I would really like this concept of analyzing tweets ...</textarea>
+								<textarea ng-model="f_offer" id="f_offer" name="f_offer" rows="10">I would really like this concept of analyzing tweets ...</textarea>
 							</div>
 						</div>
 
-						<div class="row">
-							<div class="col span_24 align-right" ng-controller='MyCtrl'>
+						<div class="row" ng-controller='MyCtrl'>
+							
+							<div class="col span_24 align-right" >
+								
 								<button class="btn btn-large" type="button" ng-click='toggleModal()'>
 								Submit
 								</button>
 
-								<modal-dialog show='modalShown' width='500px' height='10%'>
+								<modal-dialog show='modalShown' width='30%' height='10%'>
 									<h2 class="align-center margin"> Submission Successful ! </h2>
       								<p class="align-center margin">
       									Thank you for your suggestion/or feedback :)<br>
       									We will get back to you shortly...
       								<p>
       							</modal-dialog>
+
       						</div>
+
+      						<table ng-show="feedback_table_show" border="1" cellpadding="10">
+      									<tr>
+		      								<th></th>
+		      								<th>Name</th>
+		      								<th>EMail</th>
+		      								<th>Suggestion/Feedback</th>
+      									</tr>
+
+      									<tr ng-repeat="new_feedback in feedback">
+      										<th></th>
+		      								<td>{{new_feedback.f_name}}</td>
+		      								<td>{{new_feedback.f_email}}</td>
+		      								<td>{{new_feedback.f_offer}}</td>
+      									</tr>
+      						
+      							</table>
+
       					</div>
 
       				</div>

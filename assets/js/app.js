@@ -73,7 +73,27 @@ var app = angular.module('TweetSearch', []);
 
         app.controller('MyCtrl', ['$scope', function($scope) {
             $scope.modalShown = false;
-            $scope.toggleModal = function() {
-            $scope.modalShown = !$scope.modalShown;
+
+            $scope.feedback_table_show = 0; //hide feedback_table_show
+
+            $scope.feedback = [
+                    {f_name: 'Random', f_email: 'abc@xyz.com', f_offer: 'Amazing !'},
+                    {f_name: 'Qwerty', f_email: 'qwerty@qwerty.in', f_offer: 'Qwerty :)'}
+                ];
+
+            $scope.toggleModal = function() {            
+
+            var new_feedback = {
+                f_name: $scope.f_name,
+                f_email: $scope.f_email,
+                f_offer: $scope.f_offer,
+            };
+
+            $scope.feedback.push(new_feedback); 
+
+            $scope.feedback_table_show = 1; //show feedback_table_show
+
+            $scope.modalShown = !$scope.modalShown;         
+  
             };
         }]);
