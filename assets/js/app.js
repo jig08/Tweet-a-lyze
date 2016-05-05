@@ -1,15 +1,26 @@
 
 
 var app = angular.module('TweetSearch', []);
+
         app.controller('Controller', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-            $scope.Search = function() {
+            $scope.loading = 0; //hide loader
+            $scope.profile_loading = 0; //hide profile_loader
+
+            $scope.Search = function() {               
 
                 var QueryCommand = 'http://loklak.org/api/search.json?q=' + $scope.query;
+
+                $scope.loading = 1; //show loader
+                $scope.profile_loading = 0; //hide profile_loader
 
                 $http.get(String(QueryCommand)).then(function(response) {
                     console.log(response.data.statuses[0].text);
                     $scope.myData = response.data.statuses;
+
+                    $scope.loading = 0; //hide loader
+                    $scope.profile_loading = 1; //show profile_loader
+
                     for (var i = 0; i < $scope.myData.length; ++i) {
                         $scope.myData[i].text = $sce.trustAsHtml($scope.myData[i].text);
                     }

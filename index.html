@@ -62,9 +62,18 @@
 				
 					<h2 class="align-center margin"><strong>Top Tweet</strong></h2>
 					<h3 class="align-center margin">
-					<img src="{{myData[0].user.profile_image_url_https}}" alt="Loading profile picture..." height="44" width="44">
+					<p class="align-center margin" ng-show="loading">
+						<img src="assets/images/rolling.gif" height="44" width="44"/>
+					</p>
+					<img ng-show="profile_loading" src="{{myData[0].user.profile_image_url_https}}" alt="Loading profile picture..." height="44" width="44">
 					&nbsp;&nbsp;		
-					<a href="{{myData[0].link}}"> <strong>{{myData[0].screen_name}} : </strong> {{myData[0].text}} </a>
+					<a href="{{myData[0].link}}">
+						<strong>  {{myData[0].screen_name}}  </strong>
+						<!-- <p class="align-center margin" ng-show="loading">
+							<img src="assets/images/rolling.gif" height="44" width="44"/>
+						</p> -->
+						{{myData[0].text}} 
+					</a>
 					</h3>
 				</div>
 			</div>
