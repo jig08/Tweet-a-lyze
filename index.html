@@ -67,13 +67,12 @@
 					</p>
 					<img ng-show="profile_loading" src="{{myData[0].user.profile_image_url_https}}" alt="Loading profile picture..." height="44" width="44">
 					&nbsp;&nbsp;		
-					<a href="{{myData[0].link}}">
-						<strong>  {{myData[0].screen_name}}  </strong>
-						<!-- <p class="align-center margin" ng-show="loading">
-							<img src="assets/images/rolling.gif" height="44" width="44"/>
-						</p> -->
-						{{myData[0].text}} 
-					</a>
+						<a href="{{myData[0].link}}">
+							<strong>  {{myData[0].screen_name}}  </strong>
+							<div class="emoji-resize">
+								<p class="align-center margin" ng-bind-html="myData[0].text | limitTo: 1" style="font-size:20px"></p>
+							</div>
+						</a>
 					</h3>
 				</div>
 			</div>
@@ -121,38 +120,56 @@
 			<div class="row padding">
 
 				<div class="col span_4">
-					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 <p class="align-center margin" >
+					 	<a href="{{image_myData[0].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[0].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 
 				<div class="col span_4">
 					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 	<a href="{{image_myData[1].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[1].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 
 				<div class="col span_4">
 					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 	<a href="{{image_myData[2].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[2].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 
 				<div class="col span_4">
 					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 	<a href="{{image_myData[3].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[3].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 
 				<div class="col span_4">
 					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 	<a href="{{image_myData[4].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[4].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 
 				<div class="col span_4">
 					 <p class="align-center margin">
-						<img src="" alt="" height="125" width="125">
+					 	<a href="{{image_myData[5].previewURL}}">
+							<img ng-show="image_loading" src="assets/images/rolling.gif" height="44" width="44"/>
+							<img ng-show="image_block_loading" src="{{image_myData[5].previewURL}}" alt="" height="125" width="125">
+						</a>
 					</p>
 				</div>
 			
@@ -176,8 +193,10 @@
 	                <tr class="align-center margin" ng-repeat="x in myData">
 	                	<th></th>
 	                    <td class="align-center margin">
-	                    	<p class="align-center margin" ng-bind-html="x.text | limitTo: 1"></p>
-	                    	<a href="{{x.link}}" target="_blank"></a>
+	                    	<div class="emoji-resize">
+		                    	<p class="align-center margin" ng-bind-html="x.text | limitTo: 1"></p>
+		                    	<a href="{{x.link}}" target="_blank"></a>
+	                    	</div>
 	                    </td>
 	                </tr>
 
@@ -246,8 +265,6 @@
 			<hr class="divider">
 
 			<br><br>
-
-			<!-- <h2 class="align-center margin">Active Loklak Peers</h2> -->
 
 			<div class="row padding" ng-controller="LoklakPeersController">
 
@@ -346,7 +363,7 @@
 								Submit
 								</button>
 
-								<modal-dialog show='modalShown' width='50%' height='10%'>
+								<modal-dialog show='modalShown' width='200' height='200'>
 									<h2 class="align-center margin"> Submission Successful ! </h2>
       								<p class="align-center margin">
       									Thank you for your suggestion/or feedback :)<br>

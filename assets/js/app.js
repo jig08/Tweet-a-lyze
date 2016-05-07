@@ -4,15 +4,20 @@ var app = angular.module('TweetSearch', []);
 
         app.controller('Controller', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-            $scope.loading = 0; //hide loader
+            $scope.loading = 1; //show loader
             $scope.profile_loading = 0; //hide profile_loader
+            $scope.image_loading = 1; //show image_loader
+            $scope.image_block_loading = 0; //hide image_block_loader
 
             $scope.Search = function() {               
 
                 var QueryCommand = 'http://loklak.org/api/search.json?q=' + $scope.query;
+                var image_QueryCommand = 'https://pixabay.com/api/?key=2528033-e0c41becdbace0c0e39a0df71&image_type=photo&q=' + $scope.query;
 
                 $scope.loading = 1; //show loader
                 $scope.profile_loading = 0; //hide profile_loader
+                $scope.image_loading = 1; //show image_loader
+                $scope.image_block_loading = 0; //hide image_block_loader
 
                 $http.get(String(QueryCommand)).then(function(response) {
                     console.log(response.data.statuses[0].text);
@@ -26,6 +31,19 @@ var app = angular.module('TweetSearch', []);
                     }
                     //$scope.firstResult = response.data.statuses[0];
                 });
+
+                $http.get(String(image_QueryCommand)).then(function(image_response) {
+                    console.log(image_response.data.hits[0].previewURL);
+                    $scope.image_myData = image_response.data.hits;
+
+                    $scope.image_loading = 0; //hide image_loader
+                    $scope.image_block_loading = 1; //show image_block_loader
+
+                    for (var i = 0; i < $scope.image_myData.length; ++i) {
+                        $scope.image_myData[i].previewURL = $sce.trustAsHtml($scope.image_myData[i].previewURL);
+                    }
+                });
+
             }
 
         }]);
@@ -54,7 +72,7 @@ var app = angular.module('TweetSearch', []);
                 show: '='
                 },
             replace: true, // Replace with the template below
-            transclude: true, // we want to insert custom content inside the directive
+            transclude: true, // Insert custom content inside the directive
             link: function(scope, element, attrs) {
             scope.dialogStyle = {};
             

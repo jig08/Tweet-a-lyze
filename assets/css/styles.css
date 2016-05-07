@@ -48,6 +48,10 @@ body{ background-repeat:no-repeat; background-position: top center; background-a
 #Add{ padding:15px 0; }
 	#Add hr{ height:3px; background:none; border-width:1px 0 0 0; border-color:#999; margin:0px 0 3px 0; }
 #Footer{ padding:0 1.50306%; margin-bottom: 40px;}
+
+div.emoji-resize img{
+    width: 20px;
+}
 	
 
 /*******************************************
